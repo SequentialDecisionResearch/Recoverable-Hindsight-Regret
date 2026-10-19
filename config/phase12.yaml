@@ -1,0 +1,67 @@
+project_name: trading_policy_oracle_repair
+phase: 12
+seed: 20260924
+
+paths:
+  data_root: data
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+  outputs_dir: outputs
+  checkpoints_dir: checkpoints
+
+raw_data:
+  provider: yfinance
+  interval: 1d
+  start: "2005-01-01"
+  end: null
+  auto_adjust: false
+  actions: true
+  repair: false
+  keepna: false
+  timeout_seconds: 30
+  tickers: [AAPL, MSFT, AMZN, JPM, XOM, WMT]
+  cash_proxy: "^IRX"
+
+research_contract:
+  signal_time: close
+  execution_time: next_open
+  cost_bps_per_side: 5.0
+  horizon_days: 60
+  embargo_days: 5
+  start_exposures: [0.0, 0.25, 0.5, 0.75, 1.0]
+  initial_train_years: 10
+  calibration_years: 1
+  test_years: 1
+  bounded_switch_k_per_year: 10
+  publication_data_quality_required: false
+
+phase12:
+  require_phase11_checkpoint: true
+  phase8_processed_subdir: phase8
+  phase9_processed_subdir: phase9
+  phase10_processed_subdir: phase10
+  phase11_processed_subdir: phase11
+  processed_subdir: phase12
+  publication_output_subdir: publication_bundle_phase12
+  publication_zip_stem: publication_bundle_phase12
+
+  # Controlled ground-truth experiment. This does NOT alter the real-data models.
+  synthetic_worlds: [recoverable, clairvoyance_only]
+  synthetic_signal_strengths: [0.0, 0.25, 0.5, 1.0, 2.0, 4.0]
+  synthetic_replicates: 12
+  synthetic_n_days: 3600
+  synthetic_horizon_days: 20
+  synthetic_cost_bps_per_side: 2.0
+  synthetic_train_fraction: 0.60
+  synthetic_calibration_fraction: 0.20
+  synthetic_alpha: 0.10
+  synthetic_ridge_alpha: 1.0
+  max_nonrecoverable_coverage: 0.05
+
+  write_pdf_figures: true
+  write_latex_tables: true
+  continuous_figure_baselines: [donchian_55_20, mom_126, sma_20_100, voltarget_15_20]
+  continuous_figure_models: [ridge, gradient_boosting]
+  continuous_figure_lcb_method: empirical
+  run_pytest: true

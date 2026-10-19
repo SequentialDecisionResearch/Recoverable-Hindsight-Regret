@@ -1,0 +1,30 @@
+policies:
+  - id: buy_hold
+    type: buy_hold
+
+  - id: sma_20_100
+    type: sma_cross
+    short_window: 20
+    long_window: 100
+
+  - id: mom_126
+    type: momentum
+    lookback: 126
+
+  - id: donchian_55_20
+    type: breakout
+    entry_window: 55
+    exit_window: 20
+
+  - id: rsi_14_30_55
+    type: rsi_mean_reversion
+    window: 14
+    entry: 30
+    exit: 55
+
+  - id: voltarget_15_20
+    type: vol_target
+    target_ann_vol: 0.15
+    lookback: 20
+    max_exposure: 1.0
+    annualization_days: 252

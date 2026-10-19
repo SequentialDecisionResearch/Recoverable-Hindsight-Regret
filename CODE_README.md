@@ -1,21 +1,23 @@
-# Code snapshot — Recoverable Hindsight Regret
+# Code and reproducibility scope
 
-This folder is a **source-only snapshot**, extracted from the author's cumulative `small13` Phase 0–12 code archive. It contains the package modules, phase entry points, representative unit tests, dependency specification, and selected phase documentation. Data and generated artifacts are **not** included.
+This repository contains the Phase 0--12 Python research sources, representative tests, archived YAML configurations, a manuscript PDF, and aggregate CSV result tables for *Recoverable Hindsight Regret*.
 
-**Scope and limitation.** This is not yet a complete, one-command reproducibility release. In particular, the uploaded `scripts(20261019-171632).zip` did not contain the `config/phase*.yaml` runtime configurations referenced by its entry points, or the frozen dataset/checkpoint files needed to reproduce the paper tables. Do not state that the empirical results can be reproduced from this snapshot alone. Full reproducibility requires the frozen configuration files, recorded market-data snapshot or legally compliant download instructions, input manifests, checkpoints and validated steps. Archive metadata should not be described as formal pre-registration unless independently documented.
+**Configuration location.** The runnable entry points use `config/phase*.yaml` (singular `config`) by default, and several phases refer to `config/policies.yaml`. This directory contains copies of the manuscript-supplied YAML configuration files. The older `configs/` directory, if present, is an archival duplicate; **use `config/` for running scripts**. Keep any future edits synchronized.
 
-**Install development dependencies** (Python 3.11 or 3.12):
+**Scope.** The repository is **not an independently verified, end-to-end numerical reproduction package**. Market-data snapshots, per-run manifests, intermediate processed Parquet files, and trained/frozen checkpoints are not included. Reported tables are archived publication outputs, not evidence of a fresh run. Vendor records may change when downloaded again.
+
+**Install environment** (Python 3.11 or 3.12):
 
 ```bash
 python -m pip install -e ".[dev]"
 ```
 
-**Example tests**, once the environment is installed:
+**Optional tests**, after installing dependencies:
 
 ```bash
 python -m pytest -q tests
 ```
 
-The `scripts/run_phase*.py` entry points use `config/phase*.yaml` by default. These configurations are not part of this source-only delivery. Do not attempt to reproduce full experiments until you have restored and audited the original configs and input data.
+The full Phase 0--12 pipeline requires additional approved inputs and checkpoints; do not describe it as one-command reproducible or claim any tests have passed unless they are actually run and verified. Raw yfinance/Yahoo market data are not included and should not be redistributed without checking vendor terms.
 
-The underlying publication study uses yfinance/Yahoo historical market records; please check terms of use and third-party redistribution rights before publishing archived price data. No market data are included here.
+See `REPRODUCIBILITY_NOTES.md` and `documentation/README_PHASE12.md` for additional requirements.

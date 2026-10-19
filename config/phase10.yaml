@@ -1,0 +1,64 @@
+project_name: trading_policy_oracle_repair
+phase: 10
+seed: 20260924
+
+paths:
+  data_root: data
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+  outputs_dir: outputs
+  checkpoints_dir: checkpoints
+
+raw_data:
+  provider: yfinance
+  interval: 1d
+  start: "2005-01-01"
+  end: null
+  auto_adjust: false
+  actions: true
+  repair: false
+  keepna: false
+  timeout_seconds: 30
+  tickers: [AAPL, MSFT, AMZN, JPM, XOM, WMT]
+  cash_proxy: "^IRX"
+
+research_contract:
+  signal_time: close
+  execution_time: next_open
+  cost_bps_per_side: 5.0
+  horizon_days: 60
+  embargo_days: 5
+  start_exposures: [0.0, 0.25, 0.5, 0.75, 1.0]
+  initial_train_years: 10
+  calibration_years: 1
+  test_years: 1
+  bounded_switch_k_per_year: 10
+  publication_data_quality_required: false
+
+phase10:
+  require_phase9_checkpoint: true
+  phase1_processed_subdir: phase1
+  phase7_processed_subdir: phase7
+  phase8_processed_subdir: phase8
+  phase9_processed_subdir: phase9
+  processed_subdir: phase10
+  policies_config: config/policies.yaml
+  utility_models: [ridge, gradient_boosting]
+  lcb_methods: [empirical]
+  primary_lcb_method: empirical
+  deploy_margin: 0.0
+  meta_initial_policy_id: buy_hold
+  # One pre-registered transaction-cost unit as a policy-identity stability penalty.
+  # Actual exposure turnover costs are still charged by the shared execution engine.
+  meta_switch_penalty_bps: 5.0
+  initial_wealth: 1.0
+  initial_exposure: 0.0
+  annualization_days: 252
+  evaluation_horizon_days: 60
+  evaluation_splits: [same_asset_test, asset_oos_test]
+  include_naive_meta: true
+  run_continuous_pseudo_live: true
+  write_csv_summaries: true
+  daily_sample_rows: 1000
+  run_pytest: true
