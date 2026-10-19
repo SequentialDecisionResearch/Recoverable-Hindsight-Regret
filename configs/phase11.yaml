@@ -1,0 +1,49 @@
+project_name: trading_policy_oracle_repair
+phase: 11
+seed: 20260924
+
+paths:
+  data_root: data
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+  outputs_dir: outputs
+  checkpoints_dir: checkpoints
+
+raw_data:
+  provider: yfinance
+  interval: 1d
+  start: "2005-01-01"
+  end: null
+  auto_adjust: false
+  actions: true
+  repair: false
+  keepna: false
+  timeout_seconds: 30
+  tickers: [AAPL, MSFT, AMZN, JPM, XOM, WMT]
+  cash_proxy: "^IRX"
+
+research_contract:
+  signal_time: close
+  execution_time: next_open
+  cost_bps_per_side: 5.0
+  horizon_days: 60
+  embargo_days: 5
+  start_exposures: [0.0, 0.25, 0.5, 0.75, 1.0]
+  initial_train_years: 10
+  calibration_years: 1
+  test_years: 1
+  bounded_switch_k_per_year: 10
+  publication_data_quality_required: false
+
+phase11:
+  require_phase10_checkpoint: true
+  phase10_processed_subdir: phase10
+  processed_subdir: phase11
+  bootstrap_block_length_days: 20
+  bootstrap_resamples: 1000
+  confidence_level: 0.95
+  annualization_days: 252
+  include_continuous_inference: true
+  write_csv_summaries: true
+  run_pytest: true

@@ -1,0 +1,9 @@
+split,strategy,model,path dlogU [95% CI],Pboot(dlogU>0),coverage,harm,continuous dlogU [95% CI],path support,continuous support
+asset_oos_test,meta_selector,gradient_boosting,"0.0013 [-0.0177, 0.0223]",0.558,0.004,0.252,"-0.2742 [-0.6680, 0.1122]",inconclusive,inconclusive
+asset_oos_test,meta_selector,ridge,"-0.0002 [-0.0135, 0.0122]",0.482,0.000,0.000,"-0.0138 [-0.1635, 0.1187]",inconclusive,inconclusive
+asset_oos_test,naive_meta,gradient_boosting,"-0.0231 [-0.0586, 0.0117]",0.095,0.220,0.357,"-0.2023 [-0.5946, 0.1487]",inconclusive,inconclusive
+asset_oos_test,naive_meta,ridge,"-0.0054 [-0.0166, 0.0037]",0.149,0.083,0.225,"-0.0542 [-0.1700, 0.0423]",inconclusive,inconclusive
+same_asset_test,meta_selector,gradient_boosting,"-0.0159 [-0.0395, 0.0096]",0.101,0.005,0.221,"-0.3016 [-0.5459, -0.0210]",inconclusive,negative_95
+same_asset_test,meta_selector,ridge,"-0.0016 [-0.0067, 0.0015]",0.248,0.000,0.000,"-0.0159 [-0.0669, 0.0155]",inconclusive,inconclusive
+same_asset_test,naive_meta,gradient_boosting,"-0.0194 [-0.0487, 0.0111]",0.101,0.221,0.343,"-0.1913 [-0.5081, 0.1071]",inconclusive,inconclusive
+same_asset_test,naive_meta,ridge,"-0.0028 [-0.0129, 0.0083]",0.309,0.090,0.241,"-0.0276 [-0.1426, 0.0900]",inconclusive,inconclusive

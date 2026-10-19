@@ -1,0 +1,5 @@
+claim_id,claim,status,evidence
+C1_local_recoverability,Calibrated selective intervention identifies local states with positive realized continuation advantage.,supported,17/24 selective-repair groups have a 95% decision-advantage CI entirely above zero.
+C2_end_to_end_wealth,Selective repair produces statistically supported post-cost path-level utility improvement in at least some registered settings.,supported,1/24 groups have positive 95% path-level utility CI; 1 are significantly negative.
+C3_continuous_robustness,Continuous pseudo-live wealth improvement is statistically supported in at least some registered settings.,underpowered_or_not_supported,0/24 groups have positive 95% continuous utility CI; continuous inference uses only the available asset paths.
+C4_global_meta_selector,Global meta-policy selection is a robust primary contribution.,not_supported,0 fold-local meta-selector groups have positive 95% utility CI; 1 continuous meta groups have negative 95% CI.
